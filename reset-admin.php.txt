@@ -1,0 +1,18 @@
+<?php
+
+require_once __DIR__ . '/config/koneksi.php';
+
+$hash = password_hash('admin123', PASSWORD_DEFAULT);
+
+$stmt = $koneksi->prepare("
+    INSERT INTO admin (username, password, nama_lengkap)
+    VALUES (?, ?, ?)
+");
+
+$stmt->execute([
+    'admin',
+    $hash,
+    'Administrator'
+]);
+
+echo 'Admin berhasil dibuat ulang.';
